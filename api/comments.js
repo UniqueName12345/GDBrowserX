@@ -27,8 +27,8 @@ module.exports = async (app, req, res) => {
       comments = body.split('|')
       comments = comments.map(x => x.split(':'))
       comments = comments.map(x => x.map(x => app.parseResponse(x, "~")))
-      if (req.query.type == "profile") comments.filter(x => x[0][2])
-      else comments = comments.filter(x => x[0] && x[0][2])
+      if (req.query.type == "profile") comments = comments.filter(x => x[0][2])
+      else comments = comments.filter(x => x[0] && x[0][2] && x[0][1])
       if (!comments.length) return res.status(204).send([])
 
       let pages = body.split('#')[1].split(":")
